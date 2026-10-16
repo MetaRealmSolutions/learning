@@ -1,18 +1,23 @@
 {
   "name": "learning",
   "version": "1.0.0",
+  "description": "Learning — Feature Access Manager prototype",
+  "author": "MetaRealm Solutions",
   "main": "index.ts",
   "dependencies": {
+    "electron-updater": "^6.8.9"
+  },
+  "devDependencies": {
     "@expo/metro-runtime": "~58.0.14",
+    "@types/react": "~19.3.0",
+    "electron": "^44.8.0",
+    "electron-builder": "^26.15.3",
     "expo": "~58.0.11",
     "expo-status-bar": "~58.0.3",
     "react": "19.3.0",
     "react-dom": "19.3.0",
     "react-native": "0.88.0",
-    "react-native-web": "^0.21.4"
-  },
-  "devDependencies": {
-    "@types/react": "~19.3.0",
+    "react-native-web": "^0.21.4",
     "typescript": "~6.0.3"
   },
   "scripts": {
@@ -21,7 +26,39 @@
     "ios": "expo start --ios",
     "web": "expo start --web",
     "typecheck": "tsc --noEmit",
-    "build:web": "expo export --platform web"
+    "build:web": "expo export --platform web",
+    "desktop:dev": "expo export --platform web && electron electron/main.cjs",
+    "desktop:build": "expo export --platform web && electron-builder --win nsis"
+  },
+  "build": {
+    "appId": "com.metarealmsolutions.learning",
+    "productName": "Learning",
+    "directories": {
+      "output": "release"
+    },
+    "files": [
+      "electron/**/*",
+      "dist/**/*"
+    ],
+    "extraMetadata": {
+      "main": "electron/main.cjs"
+    },
+    "win": {
+      "target": "nsis"
+    },
+    "nsis": {
+      "oneClick": true,
+      "perMachine": false,
+      "artifactName": "${productName}-Setup-${version}.${ext}"
+    },
+    "publish": [
+      {
+        "provider": "github",
+        "owner": "MetaRealmSolutions",
+        "repo": "learning",
+        "releaseType": "release"
+      }
+    ]
   },
   "private": true
 }
