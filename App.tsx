@@ -4,7 +4,7 @@ import { StyleSheet, Text, View } from 'react-native';
 export default function App() {
   return (
     <View style={styles.container}>
-      <Text style={styles.text}>Version 1.0.1 (Update Successful)</Text>
+      <Text style={styles.text}>Version 1.0.2 (Auto-Update Verified)</Text>
       <StatusBar style="dark" />
     </View>
   );
